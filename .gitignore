@@ -108,3 +108,5 @@ venv.bak/
 Banana_Data/
 Banana.x86*
 .ipynb_checkpoints/
+*.log
+*.pth
