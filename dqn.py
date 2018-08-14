@@ -63,7 +63,7 @@ class DQN():
 
         return scores
 
-    def play(self, trials=20, steps=200, load=False):
+    def play(self, trials=3, steps=200, load=False):
         if load:
             self.agent.qnetwork_local.load_state_dict(torch.load(self.saved_network))
 
