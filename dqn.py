@@ -3,6 +3,7 @@ import numpy as np
 from collections import deque
 from dqn_agent import Agent
 
+
 class DQN():
 
     # env assumption: env.reset(), env.render(), env.step(), env.close()
@@ -14,7 +15,7 @@ class DQN():
 
     def train(self, n_episodes=2000, max_t=1000, eps_start=1.0,
               eps_end=0.01, eps_decay=0.995,
-              score_window_size=100, target_score=200.0,
+              score_window_size=100, target_score=13.0,
               save=True,
               verbose=True):
         """Deep Q-Learning.
