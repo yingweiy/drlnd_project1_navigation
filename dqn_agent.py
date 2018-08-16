@@ -38,7 +38,7 @@ class Agent():
         if qnetwork_type=='visual_banana':
             self.qnetwork_local = VisualQNetwork(state_size, action_size, seed).to(device)
             self.qnetwork_target = VisualQNetwork(state_size, action_size, seed).to(device)
-        if qnetwork_type=='basic_banana':
+        else:
             self.qnetwork_local = BasicQNetwork(state_size, action_size, seed).to(device)
             self.qnetwork_target = BasicQNetwork(state_size, action_size, seed).to(device)
         self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=LR)
