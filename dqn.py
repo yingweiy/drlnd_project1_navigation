@@ -9,9 +9,9 @@ class DQN():
     # env assumption: env.reset(), env.render(), env.step(), env.close()
 
     def __init__(self, name, state_size, action_size, env):
-        self.agent = Agent(state_size=state_size, action_size=action_size, seed=0)
+        self.agent = Agent(name, state_size=state_size, action_size=action_size, seed=0)
         self.env = env
-        self.saved_network = name+'_dqn_checkpoint.pth'
+        self.saved_network = env.name+'/'+name+'_dqn_checkpoint.pth'
 
     def train(self, n_episodes=2000, max_t=1000, eps_start=1.0,
               eps_end=0.01, eps_decay=0.995,
