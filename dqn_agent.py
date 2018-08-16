@@ -34,6 +34,7 @@ class Agent():
         self.seed = random.seed(seed)
 
         # Q-Network
+        self.qnetwork_type = qnetwork_type
         if qnetwork_type=='visual_banana':
             self.qnetwork_local = VisualQNetwork(state_size, action_size, seed).to(device)
             self.qnetwork_target = VisualQNetwork(state_size, action_size, seed).to(device)
@@ -67,7 +68,10 @@ class Agent():
             state (array_like): current state
             eps (float): epsilon, for epsilon-greedy action selection
         """
-        state = torch.from_numpy(state).float().unsqueeze(0).to(device)
+        if self.qnetwork_type == "visual_banana":
+            state = torch.from_numpy(state).float().to(device)
+        else:
+            state = torch.from_numpy(state).float().unsqueeze(0).to(device)
         self.qnetwork_local.eval()
         with torch.no_grad():
             action_values = self.qnetwork_local(state)
