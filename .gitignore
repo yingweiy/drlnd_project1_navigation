@@ -105,7 +105,7 @@ venv.bak/
 
 # Project related
 .idea/
-basic_banana/*
+# basic_banana/*
 visual_banana/*
 .ipynb_checkpoints/
 *.log
