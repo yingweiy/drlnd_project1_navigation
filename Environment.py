@@ -10,6 +10,8 @@ class CollectBanana():
         self.brain = self.base.brains[self.brain_name]
         self.action_size = self.brain.vector_action_space_size
         self.train_mode = True
+        self.last_frame = None
+        self.last2_frame = None
         self.reset()
         if name == 'visual_banana':
             self.state_size = self.state.shape
@@ -18,9 +20,21 @@ class CollectBanana():
 
     def get_state(self):
         if self.name == 'visual_banana':
-            # state size is 1,84,84,3   0123-0312
+            # state size is 1,84,84,3
             # Rearrange from NHWC to NCHW
-            self.state = np.transpose(self.env_info.visual_observations[0], (0,3,1,2))
+            frame = np.transpose(self.env_info.visual_observations[0], (0,3,1,2))
+            frame_size = frame.shape  # 1,3,84,84
+            #print(frame_size)
+            # NCDHW
+            self.state = np.zeros((1, frame_size[1], 3, frame_size[2], frame_size[3]))
+            #print(self.state.shape)
+            self.state[0, :, 2, :, :] = frame
+            if not(self.last_frame is None):
+                self.state[0, :, 1, :, :] = self.last_frame
+            if not(self.last2_frame is None):
+                self.state[0, :, 0, :, :] = self.last2_frame
+            self.last2_frame = self.last_frame
+            self.last_frame = frame
         else:
             self.state = self.env_info.vector_observations[0]
 

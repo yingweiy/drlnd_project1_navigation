@@ -41,16 +41,14 @@ class VisualQNetwork(nn.Module):
             fc2_units (int): Number of nodes in second hidden layer
         """
         super(VisualQNetwork, self).__init__()
-        fc=[128*4*4, 2048]
+        fc=[576, 1024]
         self.seed = torch.manual_seed(seed)
-        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=2)
-        self.bn1 = nn.BatchNorm2d(16)
-        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=2)
-        self.bn2 = nn.BatchNorm2d(32)
-        self.conv3 = nn.Conv2d(32, 64, kernel_size=3, stride=2)
-        self.bn3 = nn.BatchNorm2d(64)
-        self.conv4 = nn.Conv2d(64, 128, kernel_size=3, stride=2)
-        self.bn4 = nn.BatchNorm2d(128)
+        self.conv1 = nn.Conv3d(3, 16, kernel_size=(1, 3, 3), stride=(1,3,3))
+        self.bn1 = nn.BatchNorm3d(16)
+        self.conv2 = nn.Conv3d(16, 32, kernel_size=(1, 3, 3), stride=(1,3,3))
+        self.bn2 = nn.BatchNorm3d(32)
+        self.conv3 = nn.Conv3d(32, 64, kernel_size=(3, 3, 3), stride=(1,3,3))
+        self.bn3 = nn.BatchNorm3d(64)
         self.fc1 = nn.Linear(fc[0], fc[1])
         self.fc2 = nn.Linear(fc[1], action_size)
 
@@ -59,11 +57,13 @@ class VisualQNetwork(nn.Module):
         """Build a network that maps state -> action values."""
         #print(state.shape)
         x = F.relu(self.bn1(self.conv1(state)))
+        #print(x.shape)
         x = F.relu(self.bn2(self.conv2(x)))
         x = F.relu(self.bn3(self.conv3(x)))
-        x = F.relu(self.bn4(self.conv4(x)))
         x = x.view(x.size(0), -1)
+        #print('Flatten size:', x.shape)
         x = F.relu(self.fc1(x))
-        return self.fc2(x)
+        x = F.relu(self.fc2(x))
+        return x
 
 
