@@ -23,6 +23,12 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 ### Getting Started
 
+1. Install UNITY and ML-Agent following this instruction: 
+https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md
+
+To install Unity on Ubuntu, see this post:
+https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.350256/page-2
+
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
     - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
     - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
