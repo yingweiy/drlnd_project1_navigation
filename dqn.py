@@ -31,6 +31,7 @@ class DQN():
         scores = []  # list containing scores from each episode
         scores_window = deque(maxlen=score_window_size)  # last score_window_size scores
         eps = eps_start  # initialize epsilon
+        save12 = False
         for i_episode in range(1, n_episodes + 1):
             state = self.env.reset()
             score = 0
@@ -45,7 +46,11 @@ class DQN():
             scores_window.append(score)  # save most recent score
             scores.append(score)  # save most recent score
             eps = max(eps_end, eps_decay * eps)  # decrease epsilon
-            if np.mean(scores_window) >= target_score:
+            avg_score = np.mean(scores_window)
+            if avg_score>12.0 and not save12:
+                torch.save(self.agent.qnetwork_local.state_dict(), self.saved_network)
+                save12 = True
+            if avg_score >= target_score:
                 if verbose:
                     print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode - 100,
                                                                                              np.mean(scores_window)))

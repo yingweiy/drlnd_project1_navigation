@@ -41,21 +41,14 @@ class VisualQNetwork(nn.Module):
             fc2_units (int): Number of nodes in second hidden layer
         """
         super(VisualQNetwork, self).__init__()
+        nfilters = [128, 256, 256]
         self.seed = torch.manual_seed(seed)
-        if len(state_size)==5:
-            self.conv1 = nn.Conv3d(3, 64, kernel_size=(1, 3, 3), stride=(1,3,3))
-            self.bn1 = nn.BatchNorm3d(64)
-            self.conv2 = nn.Conv3d(64, 128, kernel_size=(1, 3, 3), stride=(1,3,3))
-            self.bn2 = nn.BatchNorm3d(128)
-            self.conv3 = nn.Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1,3,3))
-            self.bn3 = nn.BatchNorm3d(128)
-        else:
-            self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=3)
-            self.bn1 = nn.BatchNorm2d(64)
-            self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=3)
-            self.bn2 = nn.BatchNorm2d(64)
-            self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=3)
-            self.bn3 = nn.BatchNorm2d(64)
+        self.conv1 = nn.Conv3d(3, nfilters[0], kernel_size=(1, 3, 3), stride=(1,3,3))
+        self.bn1 = nn.BatchNorm3d(nfilters[0])
+        self.conv2 = nn.Conv3d(nfilters[0], nfilters[1], kernel_size=(1, 3, 3), stride=(1,3,3))
+        self.bn2 = nn.BatchNorm3d(nfilters[1])
+        self.conv3 = nn.Conv3d(nfilters[1], nfilters[2], kernel_size=(3, 3, 3), stride=(1,3,3))
+        self.bn3 = nn.BatchNorm3d(nfilters[2])
         conv_out_size = self._get_conv_out_size(state_size)
         fc = [conv_out_size, 1024]
         self.fc1 = nn.Linear(fc[0], fc[1])
