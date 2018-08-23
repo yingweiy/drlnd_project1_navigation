@@ -21,6 +21,46 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 
 The task is episodic, and in order to solve the environment, your agent must get an average score of +13 over 100 consecutive episodes.
 
+### Files and Folders
+* navigation.py: the high-level calls to construct the environment, agent, train and play. This is the main entrance.
+* dqn.py: the deep reinforcement learning algorithm routine.
+* dqn_agent.py: the class definitions of the agent and replay buffer.
+* model.py: the deep neural network models are defined in this file.
+* Environment.py: a wrapper for the UnityEnvironment. The wrapper makes the 
+environment interface similar to the OpenAI gym environment, so that 
+the DQN routines are more general.
+* dqn_test.py: a dqn test routine using the OpenAI gym environment (can be ignored).
+* folder ``basic_banana``: the directory to save the unity environment run time of the basic agent in
+ sensor mode.
+* folder ``visual_banana``: the directory to save the unity environment run time of the agent in
+ pixel/visual mode.
+ 
+#### Environment Wrapper Class
+The ``CollectBanana`` Class is a wrapper for the ``UnityEnvironment`` class, which 
+includes the following main methods:
+* step
+* reset
+* get_state
+* close
+
+The ``name`` parameter in the 
+constructor allows the selection of ``state`` format returned:
+* For basic banana, the state is a 37-dimensional vector.
+```self.state = self.env_info.vector_observations[0]```
+
+* For visual banana, the state contains three frames by calling ``get_state()``. 
+To fit the PyTorch format, the original frame format is transposed from NHWC (Batch, Height, Width, Channels) to NCHW 
+ by numpy transpose function as follows:
+``frame = np.transpose(self.env_info.visual_observations[0], (0,3,1,2))`` 
+The current frame, together with previous frame ``last_frame`` and the second previous frame, ``last2_frame``
+are then assemblied into variable ``CollectBanana.state`` variable.
+
+#### DQN and Agent
+
+
+#### Neural Network Models
+
+
 ### Getting Started
 
 1. Install UNITY and ML-Agent following this instruction: 

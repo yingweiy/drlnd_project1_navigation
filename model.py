@@ -43,12 +43,12 @@ class VisualQNetwork(nn.Module):
         super(VisualQNetwork, self).__init__()
         self.seed = torch.manual_seed(seed)
         if len(state_size)==5:
-            self.conv1 = nn.Conv3d(3, 32, kernel_size=(1, 3, 3), stride=(1,3,3))
-            self.bn1 = nn.BatchNorm3d(32)
-            self.conv2 = nn.Conv3d(32, 64, kernel_size=(1, 3, 3), stride=(1,3,3))
-            self.bn2 = nn.BatchNorm3d(64)
-            self.conv3 = nn.Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1,3,3))
-            self.bn3 = nn.BatchNorm3d(64)
+            self.conv1 = nn.Conv3d(3, 64, kernel_size=(1, 3, 3), stride=(1,3,3))
+            self.bn1 = nn.BatchNorm3d(64)
+            self.conv2 = nn.Conv3d(64, 128, kernel_size=(1, 3, 3), stride=(1,3,3))
+            self.bn2 = nn.BatchNorm3d(128)
+            self.conv3 = nn.Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1,3,3))
+            self.bn3 = nn.BatchNorm3d(128)
         else:
             self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=3)
             self.bn1 = nn.BatchNorm2d(64)
