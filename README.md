@@ -119,7 +119,8 @@ follows:
     self.fc1 = nn.Linear(fc[0], fc[1])
     self.fc2 = nn.Linear(fc[1], action_size)
 ```
-
+The network is visualized as shown below:
+![alt text](./VisualDQN.png)
 
 #### Results
 
