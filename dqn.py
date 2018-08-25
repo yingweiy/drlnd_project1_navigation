@@ -79,11 +79,17 @@ class DQN():
             self.agent.qnetwork_local.load_state_dict(torch.load(self.saved_network))
 
         for i in range(trials):
+            total_reward = 0
+            print('Start Trial...')
             state = self.env.reset()
             for j in range(steps):
                 action = self.agent.act(state)
                 self.env.render()
                 state, reward, done, _ = self.env.step(action)
+                total_reward += reward
+                if reward!=0:
+                    print("Current Reward:", reward, "Total Reward:", total_reward)
                 if done:
+                    print('Done.')
                     break
         self.env.close()
