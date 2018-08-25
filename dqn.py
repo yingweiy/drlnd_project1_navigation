@@ -51,9 +51,9 @@ class DQN():
             scores.append(score)  # save most recent score
             eps = max(eps_end, eps_decay * eps)  # decrease epsilon
             avg_score = np.mean(scores_window)
-            if avg_score>12.0 and not save12 and not self.load_net:
+            if avg_score>13.0 and not save12 and not self.load_net:
                 torch.save(self.agent.qnetwork_local.state_dict(), self.saved_network)
-                np.save('scores12_0823.npy', np.array(scores))
+                np.save('scores13_0824.npy', np.array(scores))
                 save12 = True
             if avg_score >= target_score and i_episode>100:
                 if verbose:
