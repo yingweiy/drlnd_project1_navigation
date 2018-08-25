@@ -61,6 +61,26 @@ are then assemblied into variable ``CollectBanana.state`` variable.
 #### Neural Network Models
 
 
+#### Results
+
+##### Basic Banana
+
+
+##### Visual Banana
+```angular2html
+Episode 100	Average Score: 0.133
+Episode 200	Average Score: 0.89
+Episode 300	Average Score: 2.66
+Episode 400	Average Score: 5.50
+Episode 500	Average Score: 8.63
+Episode 600	Average Score: 9.60
+Episode 700	Average Score: 11.16
+Episode 800	Average Score: 11.36
+Episode 900	Average Score: 12.13
+Episode 984	Average Score: 12.94
+Environment solved in 985 episodes!	Average Score: 13.03
+```
+
 ### Getting Started
 
 1. Install UNITY and ML-Agent following this instruction: 

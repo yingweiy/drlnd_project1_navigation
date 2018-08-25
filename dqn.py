@@ -5,13 +5,17 @@ from dqn_agent import Agent
 
 
 class DQN():
-
     # env assumption: env.reset(), env.render(), env.step(), env.close()
-
-    def __init__(self, name, state_size, action_size, env):
+    def __init__(self, name, state_size, action_size, env, load_net=False):
         self.agent = Agent(name, state_size=state_size, action_size=action_size, seed=0)
         self.env = env
         self.saved_network = name+'_dqn_checkpoint.pth'
+        self.load_net = load_net
+        if load_net:
+            print('Loading pretrained network...')
+            self.agent.qnetwork_local.load_state_dict(torch.load(self.saved_network))
+            self.agent.qnetwork_target.load_state_dict(torch.load(self.saved_network))
+            print('Loaded.')
 
     def train(self, n_episodes=2000, max_t=1000, eps_start=1.0,
               eps_end=0.01, eps_decay=0.995,
@@ -47,12 +51,13 @@ class DQN():
             scores.append(score)  # save most recent score
             eps = max(eps_end, eps_decay * eps)  # decrease epsilon
             avg_score = np.mean(scores_window)
-            if avg_score>12.0 and not save12:
+            if avg_score>12.0 and not save12 and not self.load_net:
                 torch.save(self.agent.qnetwork_local.state_dict(), self.saved_network)
+                np.save('scores12_0823.npy', np.array(scores))
                 save12 = True
-            if avg_score >= target_score:
+            if avg_score >= target_score and i_episode>100:
                 if verbose:
-                    print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode - 100,
+                    print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode,
                                                                                              np.mean(scores_window)))
                 self.solved = True
                 if save:
