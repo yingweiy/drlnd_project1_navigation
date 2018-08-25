@@ -36,6 +36,8 @@ the DQN routines are more general.
 * folder ``visual_banana``: the directory to save the unity environment run time of the agent in
  pixel/visual mode.
 * PlotScores.ipynb: the routine to plot the scores.
+* basic_banana_dqn_checkpoint.pth: saved weights for basic banana.
+* visual_banana_dqn_checkpoint.pth: saved weights for the challenge project. (achieved average score 13.03 in 985 episodes)
  
 #### Environment Wrapper Class
 The ``CollectBanana`` Class is a wrapper for the ``UnityEnvironment`` class, which 
@@ -57,7 +59,7 @@ To fit the PyTorch format, the original frame format is transposed from NHWC (Ba
 The current frame, together with previous frame ``last_frame`` and the second previous frame, ``last2_frame``
 are then assemblied into variable ``CollectBanana.state`` variable.
 
-#### DQN and Agent
+#### Training: DQN and Agent
 
 The DQN used in this implementation is the simple DQN with two networks: one is local, and one is target.
 
@@ -188,7 +190,7 @@ https://forum.unity.com/threads/unity-on-linux-release-notes-and-known-issues.35
 
 Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  
 
-### (Optional) Challenge: Learning from Pixels
+### Challenge: Learning from Pixels
 
 After you have successfully completed the project, if you're looking for an additional challenge, you have come to the right place!  In the project, your agent learned from information such as its velocity, along with ray-based perception of objects around its forward direction.  A more challenging task would be to learn directly from pixels!
 
