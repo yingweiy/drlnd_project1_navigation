@@ -109,4 +109,3 @@ basic_banana/*
 visual_banana/*
 .ipynb_checkpoints/
 *.log
-*.pth
