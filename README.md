@@ -48,7 +48,7 @@ constructor allows the selection of ``state`` format returned:
 * For basic banana, the state is a 37-dimensional vector.
 ```self.state = self.env_info.vector_observations[0]```
 
-* For visual banana, the state contains three frames by calling ``get_state()``. 
+* For visual banana, the state contains four frames by calling ``get_state()``. 
 To fit the PyTorch format, the original frame format is transposed from NHWC (Batch, Height, Width, Channels) to NCHW 
  by numpy transpose function as follows:
 ``frame = np.transpose(self.env_info.visual_observations[0], (0,3,1,2))`` 
