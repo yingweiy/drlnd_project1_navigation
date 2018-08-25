@@ -154,7 +154,7 @@ Environment solved in 985 episodes!	Average Score: 13.03
 ![alt text](./visual_banana_scores.png)
 
 
-#### Thoughts on the Challenge Project
+#### Ideas for future improvements
 From the challenge project, I observed the following:
 * Color images are better than than the gray scale images, because the bananas are in yellow and blue, also 
 the background wall, floor, and sky. It is hard to distinquish them with only gray pictures.
@@ -164,6 +164,10 @@ input state are multiple images and temporal relationships. 3D filters are keen 
 motion patterns.
 * The number of filters cannot be too small. I used 128, 256, 256 in these layers, which are much 
 better than small numbers that I tried earlier, such as 32, 64, 64. 
+
+For future improvements - the challenge project:
+* The agent could be able to achieve higher score if trained longer
+* Using other advanced DQN, such as double, dueling, replay buffer prioritization, rainbow, etc. 
 
 ## Project Instruction from Udacity
 ### Getting Started
