@@ -154,6 +154,13 @@ Environment solved in 985 episodes!	Average Score: 13.03
 ![alt text](./visual_banana_scores.png)
 
 
+See the trained agent in action on Youtube:
+
+<div align="center">
+  <a href="https://youtu.be/vC5tQfu-U1Y">
+  <img src="http://img.youtube.com/vi/vC5tQfu-U1Y/0.jpg" alt="IMAGE ALT TEXT"></a>
+</div>
+
 #### Ideas for future improvements
 From the challenge project, I observed the following:
 * Color images are better than than the gray scale images, because the bananas are in yellow and blue, also 
